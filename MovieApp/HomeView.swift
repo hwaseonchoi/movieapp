@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @Binding var movies: [Movie]  // Binding to the movies array
+    @Binding var movies: [Movie]
 
     var body: some View {
         NavigationView {
@@ -13,14 +13,18 @@ struct HomeView: View {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
                             ForEach(movies) { movie in
-                                VStack {
+                                ZStack {
+                                    // Existing pastel rectangle
                                     Rectangle()
                                         .fill(movie.backgroundColor)
                                         .frame(height: 180)
                                         .cornerRadius(12)
+                                    
+                                    // Title displayed on top of the rectangle
                                     Text(movie.title)
-                                        .font(.caption)
-                                        .padding(.top, 5)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .padding(8)
                                 }
                                 .padding()
                             }

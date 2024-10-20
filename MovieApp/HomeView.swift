@@ -11,7 +11,7 @@ struct HomeView: View {
                         .foregroundColor(.gray)
                 } else {
                     ScrollView {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                             ForEach(movies) { movie in
                                 ZStack {
                                     // Existing pastel rectangle
@@ -26,9 +26,10 @@ struct HomeView: View {
                                         .foregroundColor(.white)
                                         .padding(8)
                                 }
-                                .padding()
+                                .padding(.horizontal, 4)  // Reduce padding between cards
                             }
                         }
+                        .padding(.horizontal, 8) // Reduce padding on grid edges
                     }
                 }
             }

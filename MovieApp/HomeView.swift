@@ -6,6 +6,16 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
+                // Navigation indication
+                HStack {
+                    Spacer()
+                    Image(systemName: "movieclapper.fill")
+                        .font(.largeTitle) // Adjust the size as needed
+                        .foregroundColor(.primary)
+                    Spacer()
+                }
+                .padding(.vertical, 10)
+                
                 if movies.isEmpty {
                     Text("No movies added yet!")
                         .foregroundColor(.gray)
@@ -41,7 +51,6 @@ struct HomeView: View {
                     }
                 }
             }
-            .navigationTitle("Movies")
         }
     }
 }

@@ -4,6 +4,7 @@ struct AddMovieView: View {
     @State private var movieTitle: String = ""
     @State private var filmmakerName: String = ""
     @Binding var movies: [Movie]  // Binding to the movies array
+    @Binding var selectedTab: Int  // Binding to control the selected tab in ContentView
 
     var body: some View {
         VStack {
@@ -25,10 +26,12 @@ struct AddMovieView: View {
                     movies.append(newMovie)  // Add the new movie to the array
                     movieTitle = ""  // Clear the text field
                     filmmakerName = ""
+                    selectedTab = 0 // Switch to Home tab after adding the movie
                 }
             }) {
                 Text("Add Movie")
                     .padding()
+                    .frame(maxWidth: .infinity)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(8)

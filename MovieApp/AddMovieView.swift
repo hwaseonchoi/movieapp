@@ -23,7 +23,7 @@ struct AddMovieView: View {
             Button(action: {
                 if !movieTitle.isEmpty && !filmmakerName.isEmpty {
                     let newMovie = Movie(title: movieTitle, filmmaker: filmmakerName, backgroundColor: generateRandomPastelColor())
-                    movies.append(newMovie)  // Add the new movie to the array
+                    movies.append(newMovie)
                     movieTitle = ""  // Clear the text field
                     filmmakerName = ""
                     selectedTab = 0 // Switch to Home tab after adding the movie
@@ -37,7 +37,7 @@ struct AddMovieView: View {
                     .cornerRadius(8)
             }
             .padding()
-            .disabled(movieTitle.isEmpty || filmmakerName.isEmpty) // Disable button if either field is empty
+            .disabled(movieTitle.isEmpty || filmmakerName.isEmpty)
         }
         .padding()
     }

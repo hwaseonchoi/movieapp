@@ -15,23 +15,21 @@ struct ContentView: View {
             // Home View
             HomeView(movies: $movies) // Pass the movies array to HomeView
                 .tabItem {
-                   Image(systemName: "house.circle.fill") // Home icon
-                   Text("Home") // Optional label
+                   Image(systemName: "house.circle")
                 }
                 .tag(0)
 
             // Add Movie View
             AddMovieView(movies: $movies, selectedTab: $selectedTab) // Pass selectedTab to AddMovieView array to AddMovieView
             .tabItem {
-               Image(systemName: "plus.circle.fill") // Add Movie icon
-               Text("Add Movie") // Optional label
+               Image(systemName: "plus.circle")
             }
             .tag(1)
 
             // Profile tab
             Text("Profile View")
             .tabItem {
-                Image(systemName: "person.circle.fill") // Profile icon
+                Image(systemName: "person.circle")
             }
             .tag(2)
         }

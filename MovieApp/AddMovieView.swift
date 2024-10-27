@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AddMovieView: View {
     @State private var movieTitle: String = ""
+    @State private var filmmakerName: String = ""
     @Binding var movies: [Movie]  // Binding to the movies array
 
     var body: some View {
@@ -11,12 +12,19 @@ struct AddMovieView: View {
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
                 .padding()
+            
+            TextField("Enter filmmaker name", text: $filmmakerName)
+                            .padding()
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
+                            .padding(.horizontal)
 
             Button(action: {
-                if !movieTitle.isEmpty {
-                    let newMovie = Movie(title: movieTitle, backgroundColor: generateRandomPastelColor())
+                if !movieTitle.isEmpty && !filmmakerName.isEmpty {
+                    let newMovie = Movie(title: movieTitle, filmmaker: filmmakerName, backgroundColor: generateRandomPastelColor())
                     movies.append(newMovie)  // Add the new movie to the array
                     movieTitle = ""  // Clear the text field
+                    filmmakerName = ""
                 }
             }) {
                 Text("Add Movie")
@@ -25,6 +33,8 @@ struct AddMovieView: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
+            .padding()
+            .disabled(movieTitle.isEmpty || filmmakerName.isEmpty) // Disable button if either field is empty
         }
         .padding()
     }

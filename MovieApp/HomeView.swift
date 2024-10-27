@@ -20,11 +20,19 @@ struct HomeView: View {
                                         .frame(height: 180)
                                         .cornerRadius(12)
                                     
-                                    // Title displayed on top of the rectangle
-                                    Text(movie.title)
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding(8)
+                                    // Movie title and filmmaker name
+                                    VStack {
+                                        Text(movie.title)
+                                            .font(.title2) // Larger font for the title
+                                            .foregroundColor(.white)
+                                            .multilineTextAlignment(.center)
+                                            .padding(.bottom, 4)
+                                        
+                                        Text(movie.filmmaker)
+                                            .font(.subheadline) // Smaller font for the filmmaker
+                                            .foregroundColor(.white.opacity(0.8))
+                                            .multilineTextAlignment(.center)
+                                    }
                                 }
                                 .padding(.horizontal, 4)  // Reduce padding between cards
                             }

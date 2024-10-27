@@ -100,8 +100,8 @@
 		54F04DC42CC51A6800CF8FEE /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
-				54F04DF62CC523D900CF8FEE /* HomeView.swift */,
 				54F04DC52CC51A6800CF8FEE /* MovieApp.swift */,
+				54F04DF62CC523D900CF8FEE /* HomeView.swift */,
 				54F04DC72CC51A6800CF8FEE /* ContentView.swift */,
 				54F04DF12CC5227E00CF8FEE /* AddMovieView.swift */,
 				54F04DF32CC522EB00CF8FEE /* Models */,

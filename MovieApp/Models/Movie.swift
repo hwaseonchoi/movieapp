@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Movie: Identifiable {
     let id = UUID()
-    let title: String
-    let backgroundColor: Color
+    var title: String
+    var filmmaker: String // New property for filmmaker's name
+    var backgroundColor: Color
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab = 0
     @State private var movies: [Movie] = []  // Store the list of movies
+
     var body: some View {
         TabView(selection: $selectedTab) {
             // Home View
@@ -32,6 +33,10 @@ struct ContentView: View {
                 Image(systemName: "person.circle")
             }
             .tag(2)
+        }
+        .onAppear {
+            // Load saved movies when app starts
+            movies = PersistenceManager.shared.loadMovies()
         }
     }
 }

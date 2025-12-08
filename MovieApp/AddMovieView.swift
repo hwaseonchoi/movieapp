@@ -24,6 +24,10 @@ struct AddMovieView: View {
                 if !movieTitle.isEmpty && !filmmakerName.isEmpty {
                     let newMovie = Movie(title: movieTitle, filmmaker: filmmakerName, backgroundColor: generateRandomPastelColor())
                     movies.append(newMovie)
+
+                    // Save movies to persistence
+                    PersistenceManager.shared.saveMovies(movies)
+
                     movieTitle = ""  // Clear the text field
                     filmmakerName = ""
                     selectedTab = 0 // Switch to Home tab after adding the movie

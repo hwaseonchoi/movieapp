@@ -1,14 +1,6 @@
 # MovieApp
 
-A clean and simple iOS application for managing your personal movie collection. Built with Swift and SwiftUI, MovieApp lets you add movies to your collection and view them in an elegant grid layout.
-
-## Features
-
-- **Movie Collection Grid**: View all your movies in a beautiful 2-column grid layout with colorful cards
-- **Add Movies**: Simple form to add new movies with title and filmmaker information
-- **Visual Design**: Each movie card features a randomly-generated pastel background color
-- **Tab Navigation**: Intuitive three-tab interface for easy navigation
-- **Empty State**: Friendly message when no movies have been added yet
+A clean and simple iOS application for managing your personal movie collection and share with your friends. Built with Swift and SwiftUI, MovieApp lets you add movies to your collection and view them in a grid layout.
 
 ## Screenshots
 
@@ -28,17 +20,20 @@ The app features three main screens:
 ## Project Structure
 
 ```
-movieapp/
+MovieApp/
+├── README.md                      # Project documentation
+├── MovieApp.xcodeproj/            # Xcode project file
 ├── MovieApp/
-│   ├── MovieApp.swift           # App entry point
-│   ├── ContentView.swift         # Main tab view container
-│   ├── HomeView.swift            # Movie grid display
-│   ├── AddMovieView.swift        # Add movie form
+│   ├── MovieApp.swift             # App entry point
+│   ├── ContentView.swift          # Main tab view container
+│   ├── HomeView.swift             # Movie grid display
+│   ├── AddMovieView.swift         # Add movie form
 │   ├── Models/
-│   │   └── Movie.swift           # Movie data model
-│   └── Assets.xcassets/          # App assets and resources
-├── MovieAppTests/                # Unit tests
-└── MovieAppUITests/              # UI/Integration tests
+│   │   └── Movie.swift            # Movie data model
+│   ├── Assets.xcassets/           # App assets and resources
+│   └── Preview Content/           # Preview assets for SwiftUI
+├── MovieAppTests/                 # Unit tests
+└── MovieAppUITests/               # UI/Integration tests
 ```
 
 ## Data Model
@@ -88,13 +83,6 @@ open movieapp/MovieApp.xcodeproj
    - Scroll through your movie collection
    - Each movie displays its title and filmmaker on a colorful card
 
-## Technical Details
-
-- Uses SwiftUI's `@State` and `@Binding` for state management
-- Implements `LazyVGrid` for efficient scrolling performance
-- Pastel colors generated using random RGB values in the 0.7-1.0 range
-- Currently stores data in memory (no persistence layer)
-
 ## Current Limitations
 
 - Movies are not persisted between app sessions
@@ -131,11 +119,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is available for personal and educational use.
-
-## Author
-
-Built with SwiftUI and Swift
-
----
-
-Made with SwiftUI

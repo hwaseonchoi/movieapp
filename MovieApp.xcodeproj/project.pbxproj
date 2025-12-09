@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		540E4D412EE8751A000C0F08 /* EditMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540E4D402EE8751A000C0F08 /* EditMovieView.swift */; };
 		5494678B2EE78B2A00AC9907 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 549467872EE78B2A00AC9907 /* Assets.xcassets */; };
 		5494678C2EE78B2A00AC9907 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549467882EE78B2A00AC9907 /* PersistenceManager.swift */; };
 		5494678D2EE78B2A00AC9907 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = 549467892EE78B2A00AC9907 /* Preview Content */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		540E4D402EE8751A000C0F08 /* EditMovieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMovieView.swift; sourceTree = "<group>"; };
 		549467872EE78B2A00AC9907 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = MovieApp/Assets.xcassets; sourceTree = "<group>"; };
 		549467882EE78B2A00AC9907 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceManager.swift; path = MovieApp/PersistenceManager.swift; sourceTree = "<group>"; };
 		549467892EE78B2A00AC9907 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Preview Content"; path = "MovieApp/Preview Content"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		54F04DC42CC51A6800CF8FEE /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				540E4D402EE8751A000C0F08 /* EditMovieView.swift */,
 				54F04DC52CC51A6800CF8FEE /* MovieApp.swift */,
 				54F04DF62CC523D900CF8FEE /* HomeView.swift */,
 				54F04DC72CC51A6800CF8FEE /* ContentView.swift */,
@@ -289,6 +292,7 @@
 				54F04DC62CC51A6800CF8FEE /* MovieApp.swift in Sources */,
 				54F04DF52CC5232300CF8FEE /* Movie.swift in Sources */,
 				5494678C2EE78B2A00AC9907 /* PersistenceManager.swift in Sources */,
+				540E4D412EE8751A000C0F08 /* EditMovieView.swift in Sources */,
 				54F04DF72CC523D900CF8FEE /* HomeView.swift in Sources */,
 				54F04DF22CC5227E00CF8FEE /* AddMovieView.swift in Sources */,
 			);

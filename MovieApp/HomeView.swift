@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @Binding var movies: [Movie]
     @State private var movieToDelete: Movie?
+    @State private var movieToEdit: Movie?
 
     var body: some View {
         NavigationView {
@@ -45,6 +46,18 @@ struct HomeView: View {
                                             .multilineTextAlignment(.center)
                                     }
 
+                                    // Edit button in top-left corner
+                                    Button(action: {
+                                        movieToEdit = movie
+                                    }) {
+                                        Image(systemName: "pencil.circle.fill")
+                                            .foregroundColor(.white)
+                                            .background(Circle().fill(Color.black.opacity(0.6)))
+                                            .font(.title3)
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                                    .padding(8)
+
                                     // Delete button (X) in top-right corner
                                     Button(action: {
                                         movieToDelete = movie
@@ -82,6 +95,16 @@ struct HomeView: View {
             Button("Cancel", role: .cancel) {
                 movieToDelete = nil
             }
+        }
+        .sheet(item: $movieToEdit) { movie in
+            EditMovieView(
+                movie: movie,
+                movies: $movies,
+                isPresented: Binding(
+                    get: { movieToEdit != nil },
+                    set: { if !$0 { movieToEdit = nil } }
+                )
+            )
         }
     }
 

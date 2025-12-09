@@ -36,7 +36,7 @@ struct AddMovieView: View {
                 Text("Add Movie")
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .background(movieTitle.isEmpty || filmmakerName.isEmpty ? Color.gray : Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }

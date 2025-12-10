@@ -34,7 +34,7 @@ struct HomeView: View {
                             Spacer()
                         }
                         .padding(.vertical, 10)
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 1) {
                             ForEach(movies) { movie in
                                 MovieCard(movie: movie, onEdit: {
                                     movieToEdit = movie
@@ -43,8 +43,8 @@ struct HomeView: View {
                                 })
                             }
                         }
-                        .padding(.horizontal, 8)
-                        .padding(.bottom, 20)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 12)
                     }
                 }
                 .coordinateSpace(name: "scroll")
@@ -105,24 +105,20 @@ struct MovieCard: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: UIScreen.main.bounds.width / 2 - 16, height: 270)
                             .clipped()
-                            .cornerRadius(12)
                     case .failure, .empty:
                         Rectangle()
                             .fill(movie.backgroundColor)
                             .frame(height: 270)
-                            .cornerRadius(12)
                     @unknown default:
                         Rectangle()
                             .fill(movie.backgroundColor)
                             .frame(height: 270)
-                            .cornerRadius(12)
                     }
                 }
             } else {
                 Rectangle()
                     .fill(movie.backgroundColor)
                     .frame(height: 270)
-                    .cornerRadius(12)
             }
 
             // Title and filmmaker for non-poster movies
@@ -170,6 +166,5 @@ struct MovieCard: View {
             .allowsHitTesting(true)
         }
         .frame(height: 270)
-        .padding(.horizontal, 4)
     }
 }

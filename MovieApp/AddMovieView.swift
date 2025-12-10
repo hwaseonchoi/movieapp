@@ -304,6 +304,7 @@ struct AddMovieView: View {
 
         // Reset and switch to home
         searchQuery = ""
+        searchResults = []
         filmmakerName = ""
         selectedMovie = nil
         currentMode = .search
@@ -322,6 +323,7 @@ struct AddMovieView: View {
 
         // Reset and switch to home
         searchQuery = ""
+        searchResults = []
         filmmakerName = ""
         currentMode = .search
         selectedTab = 0

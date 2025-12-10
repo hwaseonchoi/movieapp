@@ -1,0 +1,12 @@
+import Foundation
+
+// INSTRUCTIONS:
+// 1. Copy this file and rename it to "Config.swift"
+// 2. Replace "YOUR_API_KEY_HERE" with your actual TMDB API key
+// 3. Config.swift is in .gitignore and won't be committed to git
+
+struct TMDBConfig {
+    static let apiKey = "YOUR_API_KEY_HERE"
+    static let baseURL = "https://api.themoviedb.org/3"
+    static let imageBaseURL = "https://image.tmdb.org/t/p/w500"
+}

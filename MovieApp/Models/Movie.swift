@@ -6,9 +6,15 @@ struct Movie: Identifiable, Codable {
     var filmmaker: String
     var backgroundColor: Color
 
+    // TMDB properties (optional for backward compatibility)
+    var posterPath: String?
+    var tmdbId: Int?
+    var year: String?
+
     // Custom coding keys to handle Color
     enum CodingKeys: String, CodingKey {
         case id, title, filmmaker, backgroundColorComponents
+        case posterPath, tmdbId, year
     }
 
     // Encode Color as RGB components
@@ -21,6 +27,11 @@ struct Movie: Identifiable, Codable {
         // Convert Color to RGB components
         let components = backgroundColor.cgColor?.components ?? [0.5, 0.5, 0.5, 1.0]
         try container.encode(components, forKey: .backgroundColorComponents)
+
+        // Encode optional TMDB properties
+        try container.encodeIfPresent(posterPath, forKey: .posterPath)
+        try container.encodeIfPresent(tmdbId, forKey: .tmdbId)
+        try container.encodeIfPresent(year, forKey: .year)
     }
 
     // Decode Color from RGB components
@@ -37,13 +48,21 @@ struct Movie: Identifiable, Codable {
             blue: components[2],
             opacity: components.count > 3 ? components[3] : 1.0
         )
+
+        // Decode optional TMDB properties (nil if not present for backward compatibility)
+        posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
+        tmdbId = try container.decodeIfPresent(Int.self, forKey: .tmdbId)
+        year = try container.decodeIfPresent(String.self, forKey: .year)
     }
 
     // Regular initializer
-    init(id: UUID = UUID(), title: String, filmmaker: String, backgroundColor: Color) {
+    init(id: UUID = UUID(), title: String, filmmaker: String, backgroundColor: Color, posterPath: String? = nil, tmdbId: Int? = nil, year: String? = nil) {
         self.id = id
         self.title = title
         self.filmmaker = filmmaker
         self.backgroundColor = backgroundColor
+        self.posterPath = posterPath
+        self.tmdbId = tmdbId
+        self.year = year
     }
 }

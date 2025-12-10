@@ -6,76 +6,48 @@ struct HomeView: View {
     @State private var movieToEdit: Movie?
 
     var body: some View {
-        NavigationView {
-            VStack {
-                // Navigation indication
-                HStack {
+        ZStack {
+            if movies.isEmpty {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "movieclapper.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    .padding(.vertical, 10)
+
                     Spacer()
-                    Image(systemName: "movieclapper.fill")
-                        .font(.largeTitle) // Adjust the size as needed
-                        .foregroundColor(.primary)
-                    Spacer()
-                }
-                .padding(.vertical, 10)
-                
-                if movies.isEmpty {
                     Text("No movies added yet!")
                         .foregroundColor(.gray)
-                } else {
-                    ScrollView {
+                    Spacer()
+                }
+            } else {
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 0) {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "movieclapper.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(.primary)
+                            Spacer()
+                        }
+                        .padding(.vertical, 10)
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                             ForEach(movies) { movie in
-                                ZStack {
-                                    // Existing pastel rectangle
-                                    Rectangle()
-                                        .fill(movie.backgroundColor)
-                                        .frame(height: 180)
-                                        .cornerRadius(12)
-
-                                    // Movie title and filmmaker name
-                                    VStack {
-                                        Text(movie.title)
-                                            .font(.title2) // Larger font for the title
-                                            .foregroundColor(.white)
-                                            .multilineTextAlignment(.center)
-                                            .padding(.bottom, 4)
-
-                                        Text(movie.filmmaker)
-                                            .font(.subheadline) // Smaller font for the filmmaker
-                                            .foregroundColor(.white.opacity(0.8))
-                                            .multilineTextAlignment(.center)
-                                    }
-
-                                    // Edit button in top-left corner
-                                    Button(action: {
-                                        movieToEdit = movie
-                                    }) {
-                                        Image(systemName: "pencil.circle.fill")
-                                            .foregroundColor(.white)
-                                            .background(Circle().fill(Color.black.opacity(0.6)))
-                                            .font(.title3)
-                                    }
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                    .padding(8)
-
-                                    // Delete button (X) in top-right corner
-                                    Button(action: {
-                                        movieToDelete = movie
-                                    }) {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .foregroundColor(.white)
-                                            .background(Circle().fill(Color.black.opacity(0.6)))
-                                            .font(.title3)
-                                    }
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                                    .padding(8)
-                                }
-                                .padding(.horizontal, 4)  // Reduce padding between cards
+                                MovieCard(movie: movie, onEdit: {
+                                    movieToEdit = movie
+                                }, onDelete: {
+                                    movieToDelete = movie
+                                })
                             }
                         }
-                        .padding(.horizontal, 8) // Reduce padding on grid edges
+                        .padding(.horizontal, 8)
+                        .padding(.bottom, 20)
                     }
                 }
+                .coordinateSpace(name: "scroll")
             }
         }
         .confirmationDialog(
@@ -108,12 +80,96 @@ struct HomeView: View {
         }
     }
 
-    // Delete movie function
     private func deleteMovie(_ movie: Movie) {
-        // Find and remove the movie from the array
         movies.removeAll { $0.id == movie.id }
-
-        // Save the updated list to persistence
         PersistenceManager.shared.saveMovies(movies)
+    }
+}
+
+// Extracted movie card as separate component
+struct MovieCard: View {
+    let movie: Movie
+    let onEdit: () -> Void
+    let onDelete: () -> Void
+
+    var body: some View {
+        ZStack {
+            // Background
+            if let posterPath = movie.posterPath,
+               let posterURL = TMDBService.shared.getPosterURL(path: posterPath) {
+                AsyncImage(url: posterURL) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width / 2 - 16, height: 270)
+                            .clipped()
+                            .cornerRadius(12)
+                    case .failure, .empty:
+                        Rectangle()
+                            .fill(movie.backgroundColor)
+                            .frame(height: 270)
+                            .cornerRadius(12)
+                    @unknown default:
+                        Rectangle()
+                            .fill(movie.backgroundColor)
+                            .frame(height: 270)
+                            .cornerRadius(12)
+                    }
+                }
+            } else {
+                Rectangle()
+                    .fill(movie.backgroundColor)
+                    .frame(height: 270)
+                    .cornerRadius(12)
+            }
+
+            // Title and filmmaker for non-poster movies
+            if movie.posterPath == nil {
+                VStack {
+                    Spacer()
+                    Text(movie.title)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .padding(.bottom, 2)
+
+                    Text(movie.filmmaker)
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.9))
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.bottom, 12)
+            }
+
+            // Edit button
+            Button(action: onEdit) {
+                Image(systemName: "pencil.circle.fill")
+                    .foregroundColor(.white)
+                    .background(Circle().fill(Color.black.opacity(0.6)))
+                    .font(.title3)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding(8)
+            .allowsHitTesting(true)
+
+            // Delete button
+            Button(action: onDelete) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.white)
+                    .background(Circle().fill(Color.black.opacity(0.6)))
+                    .font(.title3)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            .padding(8)
+            .allowsHitTesting(true)
+        }
+        .frame(height: 270)
+        .padding(.horizontal, 4)
     }
 }

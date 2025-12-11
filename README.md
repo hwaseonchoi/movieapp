@@ -1,12 +1,21 @@
 # MovieApp
 
-A clean and simple iOS application for managing your personal movie collection and share with your friends. Built with Swift and SwiftUI, MovieApp lets you add movies to your collection and view them in a grid layout.
+A clean and simple iOS application for managing your personal movie collection and share with your friends. Built with Swift and SwiftUI, MovieApp lets you search for movies using the TMDB API, add them to your collection with poster images, and manage them with full CRUD operations.
+
+## Features
+
+- 🎬 **Movie Search**: Search movies using The Movie Database (TMDB) API
+- 🖼️ **Poster Images**: Display movie posters fetched from TMDB
+- ➕ **Add Movies**: Add movies to your personal collection
+- ✏️ **Edit Movies**: Update movie information
+- 🗑️ **Delete Movies**: Remove movies with confirmation dialog
+- 💾 **Data Persistence**: Movies are saved using UserDefaults
 
 ## Screenshots
 
 The app features three main screens:
-- **Home Tab**: Displays your movie collection in a grid layout
-- **Add Movie Tab**: Form to add new movies to your collection
+- **Home Tab**: Displays your movie collection in a grid layout with posters
+- **Add Movie Tab**: Search and add new movies to your collection
 - **Profile Tab**: Placeholder for future user profile features
 
 ## Technologies
@@ -14,6 +23,8 @@ The app features three main screens:
 - **Language**: Swift
 - **UI Framework**: SwiftUI
 - **Architecture**: MVVM (Model-View-ViewModel)
+- **API**: The Movie Database (TMDB) API
+- **Data Persistence**: UserDefaults
 - **Development Environment**: Xcode
 - **Platform**: iOS
 
@@ -27,9 +38,16 @@ MovieApp/
 │   ├── MovieApp.swift             # App entry point
 │   ├── ContentView.swift          # Main tab view container
 │   ├── HomeView.swift             # Movie grid display
-│   ├── AddMovieView.swift         # Add movie form
+│   ├── AddMovieView.swift         # Add movie form with search
+│   ├── EditMovieView.swift        # Edit movie form
+│   ├── Config.swift               # Configuration settings
+│   ├── Config.swift.example       # Example configuration file
 │   ├── Models/
-│   │   └── Movie.swift            # Movie data model
+│   │   ├── Movie.swift            # Movie data model
+│   │   └── TMDBModels.swift       # TMDB API response models
+│   ├── Services/
+│   │   ├── TMDBService.swift      # TMDB API service
+│   │   └── PersistenceManager.swift # Data persistence service
 │   ├── Assets.xcassets/           # App assets and resources
 │   └── Preview Content/           # Preview assets for SwiftUI
 ├── MovieAppTests/                 # Unit tests
@@ -42,6 +60,7 @@ The `Movie` struct contains:
 - `id`: Unique identifier (UUID)
 - `title`: Movie title
 - `filmmaker`: Director or filmmaker name
+- `posterURL`: URL to movie poster image from TMDB
 - `backgroundColor`: Pastel color for card display
 
 ## Getting Started
@@ -50,6 +69,7 @@ The `Movie` struct contains:
 
 - macOS with Xcode installed
 - iOS Simulator or physical iOS device for testing
+- TMDB API key (for movie search functionality)
 
 ### Installation
 
@@ -59,49 +79,61 @@ git clone <repository-url>
 cd MovieApp
 ```
 
-2. Open the project in Xcode:
+2. Set up TMDB API:
+   - Get your API key from [The Movie Database](https://www.themoviedb.org/settings/api)
+   - Add your API key to the project configuration
+
+3. Open the project in Xcode:
 ```bash
-open movieapp/MovieApp.xcodeproj
+open MovieApp.xcodeproj
 ```
 
-3. Select your target device (simulator or physical device)
+4. Select your target device (simulator or physical device)
 
-4. Build and run the project:
+5. Build and run the project:
    - Press `Cmd + R` or click the Run button in Xcode
 
 ## Usage
 
-1. **Adding a Movie**:
+1. **Searching for Movies**:
    - Navigate to the "Add Movie" tab (plus icon)
-   - Enter the movie title
-   - Enter the filmmaker/director name
-   - Tap "Add Movie"
+   - Use the search functionality to find movies via TMDB
+   - Select a movie to add it to your collection
+
+2. **Adding a Movie**:
+   - Search and select a movie, or manually enter details
+   - Movie poster is automatically fetched from TMDB
    - The app automatically switches to the Home tab to show your new movie
 
-2. **Viewing Your Collection**:
+3. **Viewing Your Collection**:
    - Open the Home tab (house icon)
-   - Scroll through your movie collection
-   - Each movie displays its title and filmmaker on a colorful card
+   - Scroll through your movie collection in a grid layout
+   - Each movie displays its poster, title, and filmmaker on a colorful card
 
-## Current Limitations
+4. **Editing a Movie**:
+   - Tap on a movie card to edit its details
+   - Update title, filmmaker, or other information
+   - Changes are automatically saved
 
-- Movies are not persisted between app sessions
-- No ability to edit or delete movies
-- No search or filter functionality
-- Profile tab is not yet implemented
+5. **Deleting a Movie**:
+   - Swipe or tap delete on a movie card
+   - Confirm deletion in the dialog
+   - Movie is permanently removed from your collection
 
 ## Future Improvements
 
 Potential features for future development:
-- [ ] Persistent storage (Core Data or SwiftData)
-- [ ] Edit and delete movie functionality
-- [ ] Search and filter capabilities
+- [ ] User authentication (sign in / sign up)
+- [ ] User profile management
 - [ ] Movie ratings and notes
 - [ ] Categories or genres
-- [ ] Movie poster images
-- [ ] Sort options (by title, filmmaker, date added)
+- [ ] Advanced search and filter capabilities
+- [ ] Sort options (by title, filmmaker, date added, rating)
 - [ ] Export/import movie collection
-- [ ] Integration with movie databases (TMDb, IMDb)
+- [ ] Cloud sync across devices
+- [ ] Share movie lists with friends
+- [ ] Movie trailers and reviews
+- [ ] Watchlist functionality
 
 ## Testing
 

@@ -118,16 +118,15 @@
 		54F04DC42CC51A6800CF8FEE /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
-				54168E362EE9A3DE005B4959 /* TMDBService.swift */,
-				54168E2F2EE9A045005B4959 /* Config.swift */,
+					54168E2F2EE9A045005B4959 /* Config.swift */,
 				54168E2E2EE9A045005B4959 /* Config.swift.example */,
-				549467882EE78B2A00AC9907 /* PersistenceManager.swift */,
-				540E4D402EE8751A000C0F08 /* EditMovieView.swift */,
+					540E4D402EE8751A000C0F08 /* EditMovieView.swift */,
 				54F04DC52CC51A6800CF8FEE /* MovieApp.swift */,
 				54F04DF62CC523D900CF8FEE /* HomeView.swift */,
 				54F04DC72CC51A6800CF8FEE /* ContentView.swift */,
 				54F04DF12CC5227E00CF8FEE /* AddMovieView.swift */,
 				54F04DF32CC522EB00CF8FEE /* Models */,
+			54SERVICES01CC51A6800CF8F /* Services */,
 				54F04DC92CC51A6D00CF8FEE /* Assets.xcassets */,
 				54F04DCB2CC51A6D00CF8FEE /* Preview Content */,
 			);

@@ -13,8 +13,9 @@ A clean and simple iOS application for managing your personal movie collection a
 
 ## Screenshots
 
-The app features three main screens:
+The app features four main screens:
 - **Home Tab**: Displays your movie collection in a grid layout with posters
+- **Gallery Tab**: Compact 8-column tile view showing only posters for quick browsing
 - **Add Movie Tab**: Search and add new movies to your collection
 - **Profile Tab**: Placeholder for future user profile features
 
@@ -38,6 +39,7 @@ MovieApp/
 │   ├── MovieApp.swift             # App entry point
 │   ├── ContentView.swift          # Main tab view container
 │   ├── HomeView.swift             # Movie grid display
+│   ├── GalleryView.swift          # Compact tile gallery view
 │   ├── AddMovieView.swift         # Add movie form with search
 │   ├── EditMovieView.swift        # Edit movie form
 │   ├── Config.swift               # Configuration settings
@@ -110,12 +112,18 @@ open MovieApp.xcodeproj
    - Scroll through your movie collection in a grid layout
    - Each movie displays its poster, title, and filmmaker on a colorful card
 
-4. **Editing a Movie**:
+4. **Gallery View**:
+   - Open the Gallery tab (grid icon)
+   - Browse your entire collection in a compact 8-column tile layout
+   - Only posters are shown for quick visual scanning
+   - Perfect for getting an overview of your collection
+
+5. **Editing a Movie**:
    - Tap on a movie card to edit its details
    - Update title, filmmaker, or other information
    - Changes are automatically saved
 
-5. **Deleting a Movie**:
+6. **Deleting a Movie**:
    - Swipe or tap delete on a movie card
    - Confirm deletion in the dialog
    - Movie is permanently removed from your collection

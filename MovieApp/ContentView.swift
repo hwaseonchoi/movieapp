@@ -20,19 +20,26 @@ struct ContentView: View {
                 }
                 .tag(0)
 
+            // Gallery View
+            GalleryView(movies: $movies)
+                .tabItem {
+                    Image(systemName: "square.grid.3x3")
+                }
+                .tag(1)
+
             // Add Movie View
             AddMovieView(movies: $movies, selectedTab: $selectedTab) // Pass selectedTab to AddMovieView array to AddMovieView
-            .tabItem {
-               Image(systemName: "plus.circle")
-            }
-            .tag(1)
+                .tabItem {
+                   Image(systemName: "plus.circle")
+                }
+                .tag(2)
 
             // Profile tab
             Text("Profile View")
-            .tabItem {
-                Image(systemName: "person.circle")
-            }
-            .tag(2)
+                .tabItem {
+                    Image(systemName: "person.circle")
+                }
+                .tag(3)
         }
         .onAppear {
             // Load saved movies when app starts

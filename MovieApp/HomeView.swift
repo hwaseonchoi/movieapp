@@ -126,44 +126,38 @@ struct MovieCard: View {
                 VStack {
                     Spacer()
                     Text(movie.title)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
+                        .font(.system(.subheadline, design: .serif, weight: .semibold))
+                        .foregroundColor(.black.opacity(0.8))
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .padding(.bottom, 2)
 
                     Text(movie.filmmaker)
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.9))
+                        .foregroundColor(.black.opacity(0.65))
                         .multilineTextAlignment(.center)
                 }
                 .padding(.bottom, 12)
             }
 
-            // Edit button
-            Button(action: onEdit) {
-                Image(systemName: "pencil.circle.fill")
+            // Actions menu (edit / delete)
+            Menu {
+                Button(action: onEdit) {
+                    Label("Edit", systemImage: "pencil")
+                }
+                Button(role: .destructive, action: onDelete) {
+                    Label("Delete", systemImage: "trash")
+                }
+            } label: {
+                Image(systemName: "ellipsis")
+                    .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.white)
-                    .background(Circle().fill(Color.black.opacity(0.6)))
-                    .font(.title3)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.black.opacity(0.38)))
+                    .contentShape(Circle())
             }
-            .buttonStyle(PlainButtonStyle())
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .padding(8)
-            .allowsHitTesting(true)
-
-            // Delete button
-            Button(action: onDelete) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.white)
-                    .background(Circle().fill(Color.black.opacity(0.6)))
-                    .font(.title3)
-            }
-            .buttonStyle(PlainButtonStyle())
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             .padding(8)
-            .allowsHitTesting(true)
         }
         .frame(height: 270)
     }

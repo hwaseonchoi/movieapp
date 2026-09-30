@@ -19,6 +19,40 @@ The app features four main screens:
 - **Add Movie Tab**: Search and add new movies to your collection
 - **Profile Tab**: Placeholder for future user profile features
 
+## Mockup
+
+An interactive HTML mockup lets you preview the app's screens without Xcode. It is rebuilt from the SwiftUI code in this repository and is a design reference, not the app itself. The screenshots below come from that mockup (its interface text is in French).
+
+| Tab | Source file | What the mockup shows |
+|---|---|---|
+| Home | `HomeView.swift` | 2-column grid of 270 pt cards, with a "⋯" button opening an Edit / Delete menu |
+| Gallery | `GalleryView.swift` | 8-column poster tiles with no spacing |
+| Add Movie | `AddMovieView.swift` | Search, confirmation (optional filmmaker) and manual entry |
+| Profile | `ContentView.swift` | Placeholder text |
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/maquette/home.png" alt="Mockup of the Home tab" width="400"><br><sub>Home</sub></td>
+    <td align="center"><img src="docs/maquette/gallery.png" alt="Mockup of the Gallery tab" width="400"><br><sub>Gallery</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/maquette/add-movie.png" alt="Mockup of the Add Movie tab" width="400"><br><sub>Add Movie</sub></td>
+    <td align="center"><img src="docs/maquette/profile.png" alt="Mockup of the Profile tab" width="400"><br><sub>Profile</sub></td>
+  </tr>
+</table>
+
+### Design choices in the mockup
+
+- **One actions button per card**: a discreet translucent "⋯" replaces the separate pencil and cross buttons.
+- **Card title**: `.subheadline`, semibold, serif design (New York), so it scales with Dynamic Type.
+- **Text on pastel cards**: dark instead of white, for readability.
+
+### What is simulated
+
+- Posters from TMDB are replaced by pastel backgrounds, with invented titles and filmmakers.
+- Search runs on a local list of 12 invented films, without an API key.
+- Nothing is saved. The real app stores movies in `UserDefaults`.
+
 ## Technologies
 
 - **Language**: Swift
@@ -53,7 +87,8 @@ MovieApp/
 │   ├── Assets.xcassets/           # App assets and resources
 │   └── Preview Content/           # Preview assets for SwiftUI
 ├── MovieAppTests/                 # Unit tests
-└── MovieAppUITests/               # UI/Integration tests
+├── MovieAppUITests/               # UI/Integration tests
+└── docs/maquette/                 # Mockup screenshots
 ```
 
 ## Data Model
@@ -62,8 +97,10 @@ The `Movie` struct contains:
 - `id`: Unique identifier (UUID)
 - `title`: Movie title
 - `filmmaker`: Director or filmmaker name
-- `posterURL`: URL to movie poster image from TMDB
 - `backgroundColor`: Pastel color for card display
+- `posterPath`: Optional TMDB poster path
+- `tmdbId`: Optional TMDB movie ID
+- `year`: Optional release year
 
 ## Getting Started
 
@@ -119,12 +156,12 @@ open MovieApp.xcodeproj
    - Perfect for getting an overview of your collection
 
 5. **Editing a Movie**:
-   - Tap on a movie card to edit its details
-   - Update title, filmmaker, or other information
-   - Changes are automatically saved
+   - Tap the "⋯" button on a movie card and choose **Edit**
+   - Update the title or filmmaker
+   - Tap **Save Changes** to save
 
 6. **Deleting a Movie**:
-   - Swipe or tap delete on a movie card
+   - Tap the "⋯" button on a movie card and choose **Delete**
    - Confirm deletion in the dialog
    - Movie is permanently removed from your collection
 
